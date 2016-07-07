@@ -7,6 +7,9 @@
 unlink /etc/mtab
 /bin/nsenter --mount=/host/proc/1/ns/mnt -- cat /etc/mtab > /etc/mtab
 
+. /etc/environment
+export INSTANCE_ID=$INSTANCE_ID
+
 if [ "${DEBUG}" = "1" ]; then
     >&2 echo "primed mtab"
 fi

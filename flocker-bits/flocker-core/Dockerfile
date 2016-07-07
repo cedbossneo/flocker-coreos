@@ -4,7 +4,7 @@ FROM ubuntu:14.04
 MAINTAINER Madhuri Yechuri <madhuri.yechuri@clusterhq.com>
 
 # Note: apt-get install requires the `-1` (epoch) suffix.
-ENV FLOCKER_VERSION 1.8.0-1
+ENV FLOCKER_VERSION 1.13.0-1
 
 RUN sudo apt-get update
 RUN sudo apt-get -y install apt-transport-https software-properties-common
@@ -30,7 +30,7 @@ RUN sudo apt-get -y --force-yes install \
       autoconf \
       automake \
       autopoint \
-      libtool
+      libtool unzip cron
 
 RUN sudo git clone git://git.kernel.org/pub/scm/utils/util-linux/util-linux.git util-linux
 RUN sudo bash -c "cd util-linux; \
@@ -53,3 +53,7 @@ RUN bash /tmp/wrap_command.sh /sbin blkid 755
 # XXX: Implement this in Flocker (FLOC-190)
 ADD flocker-ca /opt/flocker/bin/flocker-ca
 RUN chmod a+x /opt/flocker/bin/flocker-ca
+
+# Patched version of cinder
+ADD cinder.py /opt/flocker/local/lib/python2.7/site-packages/flocker/node/agents/cinder.py
+
