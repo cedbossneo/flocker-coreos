@@ -14,6 +14,7 @@ RUN cd /tmp \
 
 ADD crontab /etc/cron.d/backup
 RUN chmod 0644 /etc/cron.d/backup
+RUN /usr/bin/crontab /etc/cron.d/backup
 ADD run.sh /run.sh
 ADD backup.sh /root/backup.sh
 

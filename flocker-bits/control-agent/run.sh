@@ -12,5 +12,5 @@ EOF
 
 mkdir -p /var/lib/flocker
 rclone copy Openstack:flocker-backup-${STACK} /var/lib/flocker
-cron -l
+cron
 /usr/sbin/flocker-control -p tcp:4523 -a tcp:4524
